@@ -60,6 +60,12 @@ Add-SPOCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
         [Parameter(Mandatory = false, HelpMessage = "The scope of the CustomAction to add to. Either Web or Site; defaults to Web. 'All' is not valid for this command.")]
         public CustomActionScope Scope = CustomActionScope.Web;
 
+        [Parameter(Mandatory = false, HelpMessage = "A block of script file for this custom action (only applies when Location is 'ScriptLink').")]
+        public string ScriptBlock = string.Empty;
+
+        [Parameter(Mandatory = false, HelpMessage = "Reference a script file for this custom action (only applies when Location is 'ScriptLink') e.g. ~sitecollection/Style Library/Project/myscript.js.")]
+        public string ScriptSrc = string.Empty;
+
         protected override void ExecuteCmdlet()
         {
             var permissions = new BasePermissions();
@@ -81,6 +87,8 @@ Add-SPOCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
                 Description = Description,
                 Location = Location,
                 Group = Group,
+                ScriptBlock = ScriptBlock,
+                ScriptSrc = ScriptSrc,
                 Sequence = Sequence,
                 Title = Title,
                 Url = Url,
